@@ -21,7 +21,14 @@
     <hr>
     <?php 
     $id = ($_GET['id']);
-    echo "<p>ต้องการกระทู้หมายเลข $id</p>"
+    $i = $id%2;
+    echo "<p>ต้องการกระทู้หมายเลข $id</p>";
+    if($i==1){
+        echo "<p>เป็นกระทู้หมายเลขคี่";
+    }else{
+        echo "<p>เป็นกระทู้หมายเลขคู่";
+    }
+    
     ?>
     <center>
     <form action="">
@@ -37,7 +44,7 @@
         </tr>
         </table>
     </form>
-    <p><a href="index.html">กลับไปหน้าหลัก</a></p>
+    <p><a href="index.php">กลับไปหน้าหลัก</a></p>
     </center>
 </body>
 </html>
