@@ -41,7 +41,7 @@ if(isset($_SESSION['id'])){
             echo "<p>เข้าสู้ระบบด้วย MEMBER";
         }else{
             $_SESSION['error'] = 'error';
-            header("location: login.html");
+            header("location: login.php");
             echo "<p>ชื่อบัญชีหรือรหัสผ่านไม่ถูกต้อง";
         }
     ?>

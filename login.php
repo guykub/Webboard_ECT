@@ -30,6 +30,7 @@
             </form>
         </div>  
     </nav><br>
+    <!-- alert -->
     <div class="d-flex justify-content-center">
         <form action="verify.php" method="POST">
             <div class="card"  style="width: 25rem;">
@@ -50,27 +51,7 @@
                 </div>
             </div><br>
             <p class="text-center">ถ้ายังไม่ได้เป็นสมาชิก <a href="register.php">กรุณาสมัครสมาชิก</a></p>
-    </div>
-    <!-- <table>
-        <tr>
-            <td style="background-color: #6CD2FE; text-align: center;" colspan="2">เข้าสู่ระบบ</td>
-        </tr>
-        <tr>
-            <td>Login</td>
-            <td><input type="text" name="user" required></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password" required></td>
-        </tr>
-        <tr>
-            <td style="text-align: center;" colspan="2" >
-                <input type="submit" value="Login">
-            </td>
-        </tr>
-    </table>
-        </form>
-        <p>ถ้ายังไม่ได้เป็นสมาชิก <a href="register.html">กรุณาสมัครสมาชิก</a></p> -->
+        </div>
     </div>
 </body>
 </html>
