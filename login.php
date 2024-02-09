@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         body{
             font-family: sans-serif;
         }
-        h1{
+        .text-center{
             text-align: center;
         }
         table{
@@ -17,11 +20,38 @@
     </style>
 </head>
 <body>
-    <h1>Webboard</h1>
-    <hr>
-    <center>
+    <h1 class="text-center">Webboard</h1>
+    <div class="container mt-3">
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#home"><i class="bi bi-house-door-fill"></i> Home</a>
+            <form class="d-flex">
+                <a href="login.php" class="navbar-brand"><i class="bi bi-box-arrow-in-left"></i> เข้าสู่ระบบ</a>
+            </form>
+        </div>  
+    </nav><br>
+    <div class="d-flex justify-content-center">
         <form action="verify.php" method="POST">
-    <table>
+            <div class="card"  style="width: 25rem;">
+                <div class="card-header text-center">เข้าสู่ระบบ</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Login:</label>
+                        <input type="text" name="user" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" class="form-control"name="password" placeholder="Password" required>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-secondary m-1">Login</button>
+                    <button type="submit" class="btn btn-secondary m-1">Register</button>
+                    </div>
+                </div>
+            </div><br>
+            <p class="text-center">ถ้ายังไม่ได้เป็นสมาชิก <a href="register.php">กรุณาสมัครสมาชิก</a></p>
+    </div>
+    <!-- <table>
         <tr>
             <td style="background-color: #6CD2FE; text-align: center;" colspan="2">เข้าสู่ระบบ</td>
         </tr>
@@ -40,7 +70,7 @@
         </tr>
     </table>
         </form>
-        <p>ถ้ายังไม่ได้เป็นสมาชิก <a href="register.html">กรุณาสมัครสมาชิก</a></p>
-    </center>
+        <p>ถ้ายังไม่ได้เป็นสมาชิก <a href="register.html">กรุณาสมัครสมาชิก</a></p> -->
+    </div>
 </body>
 </html>
