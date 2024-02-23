@@ -32,17 +32,14 @@ if(isset($_SESSION['id'])){
             $_SESSION['role'] = 'a';
             $_SESSION['id'] = session_id();
             header("location: index.php");
-            echo "<p>เข้าสู่ระบบด้วย Admin";
         }elseif($login=="member" && $pwd=="mem1234"){
             $_SESSION['username'] = 'member';
             $_SESSION['role'] = 'm';
             $_SESSION['id'] = session_id();
             header("location: index.php");
-            echo "<p>เข้าสู้ระบบด้วย MEMBER";
         }else{
             $_SESSION['error'] = 'error';
             header("location: login.php");
-            echo "<p>ชื่อบัญชีหรือรหัสผ่านไม่ถูกต้อง";
         }
     ?>
     <p>Login = <?php echo $_POST['user']; ?></p>

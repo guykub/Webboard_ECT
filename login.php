@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,22 +34,28 @@
         </div>  
     </nav><br>
     <!-- alert -->
+    <?php
+        if(isset($_SESSION["error"])){
+            echo "<div class='container mt-3' style='width: 26.5rem;'><div class='alert alert-danger'><span>ชื่อบัญชีหรือรหัสผ่านไม่ถูกต้อง</span></div></div>";
+            unset($_SESSION["error"]);
+        }
+    ?>
     <div class="d-flex justify-content-center">
         <form action="verify.php" method="POST">
             <div class="card"  style="width: 25rem;">
                 <div class="card-header text-center">เข้าสู่ระบบ</div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label>Login:</label>
-                        <input type="text" name="user" class="form-control" placeholder="Username">
+                        <label for="user" class="form-label">Login:</label>
+                        <input type="text" name="user" id="user" class="form-control" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <label>Password:</label>
-                        <input type="password" class="form-control"name="password" placeholder="Password" required>
+                        <label for="pwd" class="form-label">Password:</label>
+                        <input type="password" id="pwd" class="form-control"name="password" placeholder="Password" required>
                     </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-secondary m-1">Login</button>
-                    <button type="submit" class="btn btn-secondary m-1">Register</button>
+                    <button type="reset" class="btn btn-secondary m-1">Reset</button>
                     </div>
                 </div>
             </div><br>
