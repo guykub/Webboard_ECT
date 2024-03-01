@@ -11,6 +11,9 @@ if(!isset($_SESSION['id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         body{
             font-family: sans-serif;
@@ -21,38 +24,73 @@ if(!isset($_SESSION['id'])){
     </style>
 </head>
 <body>
-    <h1>Webboard</h1>
-    <hr>
-    <form action="#">
-        <table>
-            <tr>
-                <td>ผู้ใช้ : </td>
-                <?php echo "<td>$_SESSION[username]</td>" ?>
-            </tr>
-            <tr>
-                <td>หมวดหมู่ : </td>
-                <td>
-                    <select name="category">
-                    <option value="general">เรื่องทั่วไป</option>
-                    <option value="study">เรื่องเรียน</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>หัวข้อ</td>
-                <td><input type="text" name="new-head"></td>
-            </tr>
-            <tr>
-                <td>เนื้อหา : </td>
-                <td><textarea name="" id="" cols="21" rows="5"></textarea></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="บันทึกข้อความ">
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div class="container">
+        <div class="mt-3 text-center">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#"><i class="bi bi-house-door-fill"></i> Home</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo "<i class='bi bi-people-fill'></i> $_SESSION[user]" ?></a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="logout.php">ออกจากระบบ</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="row mt-4">
+                <div class="col-lg-3 col-md-2 col-sm-1"></div>
+                <div class="col-lg-6 col-md-8 col-sm-10">
+                    <div class="card border-info">
+                        <div class="card-header bg-info text-white">ตั้งกระทู้ใหม่</div>
+                        <div class="card-body">
+                            <form action="newpost_save.php" method="post">
+                                <div class="row">
+                                    <label class="col-lg-3 col-form-label">หมวดหมู่ : </label>
+                                    <div class="col-lg-9">
+                                        <select name="category" class="form-select">
+                                            <?php 
+                                                $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+                                                $sql = "SELECT * FROM `category`";
+                                                foreach($conn->query($sql) as $row){
+                                                    echo "<option value=$row[id]>$row[name]</option>";
+                                                }
+                                                $conn=null;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <label class="col-lg-3 col-form-label">หัวข้อ : </label>
+                                    <div class="col-lg-9">
+                                        <input type="text" name="topic" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <label class="col-lg-3 col-form-label">เนื้อหา</label>
+                                    <div class="col-lg-9">
+                                        <textarea name="comment" rows="8" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-12 d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-info btn-sm text-white me-2"><i class="bi bi-caret-right-square"></i> บันทึกข้อความ</button>
+                                        <button type="reset" class="btn btn-danger btn-sm"><i class="bi bi-x-square"></i> ยกเลิก</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-2 col-sm-1"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "conn.php"
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,8 +49,13 @@ session_start();
                                     <button href="#" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">ทั้งหมด</button>
                                     <ul class="dropdown-menu">
                                         <li><a href="#" class="dropdown-item">ทั้งหมด</a></li>
-                                        <li><a href="#" class="dropdown-item">เรื่องทั่วไป</a></li>
-                                        <li><a href="#" class="dropdown-item">เรื่องเรียน</a></li>
+                                        <?php
+                                        $sql="SELECT * FROM `category`";
+                                        foreach($conn->query($sql) as $row){
+                                            echo "<li><a class=dropdown-item href=#>$row[name]</a></li>";
+                                        }
+                                        $conn=null;
+                                        ?>
                                     </ul>
                                 </li>
                             </ul>
@@ -58,12 +63,15 @@ session_start();
                     </div>
                 </nav><br>
                 <table class="table table-striped">
-                    <tbody><?php $i = 1;
-                            while ($i <= 10) {
-                                echo "<tr><td><a href='post.php?id=$i'>กระทู้ที่ $i</a></td></tr>";
-                                $i++;
-                            } ?>
-                    </tbody>
+                    <?php 
+                    $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+                    $sql1="SELECT t3.name,t1.title,t1.id,t2.user,t1.post_date FROM `post` as t1 INNER JOIN `user` as t2 ON (t1.user_id=t2.id) INNER JOIN `category` as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC";
+                    $result = $conn->query($sql1);
+                    while($row = $result->fetch()){
+                        echo "<tr><td>[$row[0]]<a href=post.php?id=$row[2] style=text-decoration:none>$row[1]</a><br>$row[3] - $row[4]</td></tr>";
+                    }
+                    $conn=null;
+                    ?>
                 </table>
             </form>
         </div>
@@ -81,7 +89,7 @@ session_start();
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo "<i class='bi bi-people-fill'></i> $_SESSION[username]" ?></a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo "<i class='bi bi-people-fill'></i> $_SESSION[user]" ?></a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="logout.php">ออกจากระบบ</a></li>
                                 </ul>
@@ -90,7 +98,7 @@ session_start();
                     </div>
                 </div>
             </nav>
-                <nav class="nav navbar-expand-lg">
+                <nav class="nav navbar-expand-lg mt-3">
                     <div class="container-fluid">
                         <div class="collapse navbar-collapse">
                             <span class="navbar-text">หมวดหมู่ : </span>
@@ -99,8 +107,14 @@ session_start();
                                     <button href="#" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">ทั้งหมด</button>
                                     <ul class="dropdown-menu">
                                         <li><a href="#" class="dropdown-item">ทั้งหมด</a></li>
-                                        <li><a href="#" class="dropdown-item">เรื่องทั่วไป</a></li>
-                                        <li><a href="#" class="dropdown-item">เรื่องเรียน</a></li>
+                                        <?php
+                                        $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+                                        $sql="SELECT * FROM `category`";
+                                        foreach($conn->query($sql) as $row){
+                                            echo "<li><a class=dropdown-item href=#>$row[name]</a></li>";
+                                        }
+                                        $conn=null;
+                                        ?>
                                     </ul>
                                 </li>
                             </ul>
@@ -113,16 +127,19 @@ session_start();
                     </div>
                 </nav><br>
                 <table class="table table-striped">
-                    <tbody><?php $i = 1;
-                            while ($i <= 10) {
-                                echo "<tr><td class='col-11'><a href='post.php?id=$i'>กระทู้ที่ $i</a>";
-                                if (isset($_SESSION['id']) && $_SESSION['role'] == 'a') {
-                                    echo "<td class='col-1'><a href='delete.php?id=$i' class='btn btn-danger'>ลบ</a></td></tr>";
-                                }
-                                $i++;
-                            } ?>
+                <?php 
+                    $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+                    $sql1="SELECT t3.name,t1.title,t1.id,t2.user,t1.post_date FROM `post` as t1 INNER JOIN `user` as t2 ON (t1.user_id=t2.id) INNER JOIN `category` as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC";
+                    $result = $conn->query($sql1);
+                    while($row = $result->fetch()){
+                        echo "<tr><td class='col-11'>[$row[0]]<a href=post.php?id=$row[2] style=text-decoration:none>$row[1]</a><br>$row[3] - $row[4]</td></tr>";
+                        if (isset($_SESSION['id']) && $_SESSION['role'] == 'a') {
+                            echo "<td class='col-1'><a href='delete.php?id=$i' class='btn btn-danger'>ลบ</a></td></tr>";
+                    }
+                }
+                    $conn=null;
+                    ?>
                         <?php } ?>
-                    </tbody>
                 </table>
             </form>
         </body>

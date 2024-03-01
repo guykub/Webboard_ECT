@@ -51,7 +51,7 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label for="pwd" class="form-label">Password:</label>
-                        <input type="password" id="pwd" class="form-control"name="password" placeholder="Password" required>
+                        <input type="password" id="pwd" class="form-control"name="pwd" placeholder="Password" required>
                     </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-secondary m-1">Login</button>
