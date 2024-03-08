@@ -34,7 +34,7 @@ include "conn.php"
         <div class="container">
             <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#home"><i class="bi bi-house-door-fill"></i> Home</a>
+                    <a class="navbar-brand" href="index.php"><i class="bi bi-house-door-fill"></i> Home</a>
                     <form class="d-flex">
                         <a href="login.php" class="navbar-brand"><i class="bi bi-box-arrow-in-left"></i> เข้าสู่ระบบ</a>
                     </form>
