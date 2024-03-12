@@ -26,6 +26,12 @@
     </style>
 </head>
 <body>
+    <?php
+    if(!isset($_SESSION['id'])){
+        header("location:index.php");
+        die();
+    }
+    ?>
     <div class="container-lg">
         <div class="mt-3"><h1>Webboard KakKak</h1></div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -68,15 +74,22 @@
                 </div>
                 <div class="col-lg-3 col-md-2 col-sm-1"></div>
             </div><?php }?>
+            <?php 
+                $stmt = $conn->prepare("SELECT * FROM comment INNER JOIN user ON (comment.user_id=user.id ) WHERE post_id= $_GET[id]");
+                $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                $stmt->execute();
+                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $i = 1;
+                $rs = $stmt->fetchAll();
+            ?>
             <?php foreach($rs as $row){ ?>
             <div class="row mt-4">
                 <div class="col-lg-3 col-md-2 col-sm-1"></div>
                 <div class="col-lg-6 col-md-8 col-sm-10">
                     <div class="card border-info">
-                        <div class="card-header bg-info text-white"><?=$row['title'];?></div>
+                        <div class="card-header bg-info text-white"><?php echo"ความคิดเห็นที่ $i";?></div>
                         <div class="card-body">
                             <form action="post_save.php" method="post">
-                                <input type="hidden" name="post_id" value="<?=$_GET['id'];?>">
                                 <div class="row mb-3">
                                     <div><?=$row['content']?></div>
                                 </div>
@@ -89,7 +102,9 @@
                     <br>
                 </div>
                 <div class="col-lg-3 col-md-2 col-sm-1"></div>
-            </div><?php }?>
+            </div><?php $i++; 
+                    $conn = null;
+                  }?>
             <div class="row mt-4">
                 <div class="col-lg-3 col-md-2 col-sm-1"></div>
                 <div class="col-lg-6 col-md-8 col-sm-10">
