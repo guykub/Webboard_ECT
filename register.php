@@ -61,6 +61,12 @@
                                     </div>
                                 </div>
                                 <div class="row mt-3">
+                                    <label class="col-lg-3 col-form-label" for="pwd2">ใส่รหัสผ่านอีกครั้ง : </label>
+                                    <div class="col-lg-9">
+                                        <input type="password" name="pwd2" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
                                     <label class="col-lg-3 col-form-label" for="name">ชื่อ - นามสกุล : </label>
                                     <div class="col-lg-9">
                                         <input type="text" name="name" class="form-control" required>

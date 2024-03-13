@@ -132,9 +132,9 @@ include "conn.php"
                     $sql1="SELECT t3.name,t1.title,t1.id,t2.user,t1.post_date FROM `post` as t1 INNER JOIN `user` as t2 ON (t1.user_id=t2.id) INNER JOIN `category` as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC";
                     $result = $conn->query($sql1);
                     while($row = $result->fetch()){
-                        echo "<tr><td class='col-11'>[$row[0]]<a href=post.php?id=$row[2] style=text-decoration:none>$row[1]</a><br>$row[3] - $row[4]</td>";
+                        echo "<tr><td class='col-11'>[$row[0]]<a href=post.php?id=$row[2] style=text-decoration:none> $row[1]</a><br>$row[3] - $row[4]</td>";
                         if (isset($_SESSION['id']) && $_SESSION['role'] == 'a') {
-                            echo "<td class='col-1'><a href='delete.php?id=$row[2]' onclick='return myConfrim()' name'del' class='btn btn-danger'>ลบ</a></td></tr>";
+                            echo "<td class='col-1'><a href='delete.php?del=$row[2]' onclick='return myConfrim()' name'del' class='btn btn-danger'>ลบ</a></td></tr>";
                     }
                 }
                     $conn=null;
@@ -145,12 +145,13 @@ include "conn.php"
         </body>
         <script>
             function myConfrim(){
-                var txt;
-                if(confirm("ต้องการลบจริงหรือไม่")){
-                    alert("ยืนยันสถานะเรียบร้อย");
-                    window.location = 'index.php';
+                txt = confirm("ต้องการลบจริงหรือไม่");
+                if(txt){
+                    document.location.href=`delete.php?del=$row[2]`;
+                    return true;
                 }else{
                     window.location = 'index.php';
+                    return false;
                 }
             }
         </script>
