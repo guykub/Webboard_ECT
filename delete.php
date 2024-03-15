@@ -5,6 +5,8 @@ if(isset($_SESSION['id']) && $_SESSION['role']=='a'){
         $del_id = $_GET['del'];
         $sql = "DELETE FROM `post` WHERE id='$del_id'";
         $query = $conn->query($sql);
+        $sql = "DELETE FROM `comment` WHERE post_id='$del_id'";
+        $query = $conn->query($sql);
         if($query){
             echo "<script> 
             alert('ลบกระทู้สำเร็จ');

@@ -11,6 +11,9 @@ if(isset($_POST['user'])){
     $result=$conn->query($sql);
     if($result->rowCount()==1){
         $_SESSION['add_user']="error";
+
+    }else if($_POST['pwd']!=$_POST['pwd2']){
+        $_SESSION['add_user']="error";
     }else{
     $sql1 = "INSERT INTO `user`(`user`, `password`, `name`, `gender`, `email`, `role`) VALUES ('$user','$password','$name','$gender','$email','m')";
     $conn->exec($sql1);

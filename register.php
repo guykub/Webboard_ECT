@@ -25,7 +25,7 @@
             <h1 class="mt-3 text-center">Webboard</h1>
             <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#home"><i class="bi bi-house-door-fill"></i> Home</a>
+                    <a class="navbar-brand" href="index.php"><i class="bi bi-house-door-fill"></i> Home</a>
                     <form class="d-flex">
                         <a href="login.php" class="navbar-brand"><i class="bi bi-box-arrow-in-left"></i> เข้าสู่ระบบ</a>
                     </form>
@@ -37,6 +37,7 @@
                     <?php
                     if(isset($_SESSION['add_user'])){
                         if($_SESSION['add_user']=="error"){
+                            echo "<script>alert('มีชื่อผู้ใช้อยู่แล้วโปรดใช้ชื่อผู้ใช้ใหม่');</script>";
                             echo "<div class='alert alert-danger'>ชื่อบัญชีซ้ำหรือฐานข้อมูลมีปัญหา</div>";
                         }else{
                             echo "<div class='alert alert-success'>เพิ่มบัญชีเรียบร้อย</div>";
@@ -51,19 +52,19 @@
                                 <div class="row">
                                     <label for="user" class="col-lg-3 col-form-label">ชื่อบัญชี</label>
                                     <div class="col-lg-9">
-                                        <input type="text" name="user" class="form-control" required>
+                                        <input type="text" id="user" name="user" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <label class="col-lg-3 col-form-label" for="pwd">รหัสผ่าน : </label>
                                     <div class="col-lg-9">
-                                        <input type="password" name="pwd" class="form-control" required>
+                                        <input type="password" id="pwd" name="pwd" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <label class="col-lg-3 col-form-label" for="pwd2">ใส่รหัสผ่านอีกครั้ง : </label>
                                     <div class="col-lg-9">
-                                        <input type="password" name="pwd2" class="form-control" required>
+                                        <input type="password" id="pwd2" name="pwd2" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -97,7 +98,7 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-lg-12 d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-primary btn-sm me-2"><i class="bi bi-save"></i> สมัครสมาชิก</button>
+                                        <button type="submit" class="btn btn-primary btn-sm me-2" onclick="CheckPassword()"><i class="bi bi-save"></i> สมัครสมาชิก</button>
                                         <button type="reset" class="btn btn-danger btn-sm"><i class="bi bi-x-square"></i> ยกเลิก</button>
                                     </div>
                                 </div>
@@ -109,4 +110,13 @@
             </div>
         </div>
 </body>
+<script>
+    function CheckPassword(){
+        var pwd = document.getElementById('pwd').value;
+        var pwd2 = document.getElementById('pwd2').value;
+        if(pwd != pwd2){
+            alert('รหัสผ่านทั้งสองช่องไม่ตรงกัน')
+        }
+    }
+</script>
 </html>

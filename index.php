@@ -27,7 +27,6 @@ include "conn.php"
     </style>
 </head>
 <?php if (!isset($_SESSION['id'])) { ?>
-
     <body>
         <h1 class="text-center">Webboard</h1>
         <form action="post.php" method="get">
@@ -134,7 +133,7 @@ include "conn.php"
                     while($row = $result->fetch()){
                         echo "<tr><td class='col-11'>[$row[0]]<a href=post.php?id=$row[2] style=text-decoration:none> $row[1]</a><br>$row[3] - $row[4]</td>";
                         if (isset($_SESSION['id']) && $_SESSION['role'] == 'a') {
-                            echo "<td class='col-1'><a href='delete.php?del=$row[2]' onclick='return myConfrim()' name'del' class='btn btn-danger'>ลบ</a></td></tr>";
+                            echo "<td class='col-1'><a href='delete.php?del=$row[2]' onclick='return myFunction()' name'del' class='btn btn-danger'>ลบ</a></td></tr>";
                     }
                 }
                     $conn=null;
@@ -144,13 +143,12 @@ include "conn.php"
             </form>
         </body>
         <script>
-            function myConfrim(){
+            function myFunction(){
                 txt = confirm("ต้องการลบจริงหรือไม่");
                 if(txt){
                     document.location.href=`delete.php?del=$row[2]`;
                     return true;
                 }else{
-                    window.location = 'index.php';
                     return false;
                 }
             }

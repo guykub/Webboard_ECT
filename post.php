@@ -26,17 +26,15 @@
     </style>
 </head>
 <body>
-    <?php
-    if(!isset($_SESSION['id'])){
-        header("location:index.php");
-        die();
-    }
-    ?>
     <div class="container-lg">
         <div class="mt-3"><h1>Webboard KakKak</h1></div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="index.php"><i class="bi bi-house-door-fill"></i> Home</a>
+                    <?php
+                    if(!isset($_SESSION['id'])){ ?>
+                    <a href="login.php" class="navbar-brand"><i class="bi bi-box-arrow-in-left"></i> เข้าสู่ระบบ</a>
+                    <?php }else{ ?> 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -50,6 +48,7 @@
                             </li>
                         </ul>
                     </div>
+                    <?php }?>
                 </div>
             </nav>
             <?php foreach($rs as $row){ ?>
@@ -94,7 +93,7 @@
                                     <div><?=$row['content']?></div>
                                 </div>
                                 <div class="row">
-                                    <div><?=$_SESSION['user'];?> <?=$row['post_date']?></div>
+                                    <div><?=$row['user'];?> <?=$row['post_date']?></div>
                                 </div>
                             </form>
                         </div>
@@ -102,9 +101,11 @@
                     <br>
                 </div>
                 <div class="col-lg-3 col-md-2 col-sm-1"></div>
-            </div><?php $i++; 
+            </div><?php $i++;
+            }
                     $conn = null;
-                  }?>
+                    if(isset($_SESSION['id'])){
+                  ?>
             <div class="row mt-4">
                 <div class="col-lg-3 col-md-2 col-sm-1"></div>
                 <div class="col-lg-6 col-md-8 col-sm-10">
@@ -128,6 +129,6 @@
                     <br>
                 </div>
                 <div class="col-lg-3 col-md-2 col-sm-1"></div>
-            </div>
+            </div><?php }?>
 </body>
 </html>

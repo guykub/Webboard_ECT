@@ -27,7 +27,7 @@ session_start();
     <div class="container mt-3">
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#home"><i class="bi bi-house-door-fill"></i> Home</a>
+            <a class="navbar-brand" href="index.php"><i class="bi bi-house-door-fill"></i> Home</a>
             <form class="d-flex">
                 <a href="login.php" class="navbar-brand"><i class="bi bi-box-arrow-in-left"></i> เข้าสู่ระบบ</a>
             </form>
@@ -51,7 +51,13 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label for="pwd" class="form-label">Password:</label>
-                        <input type="password" id="pwd" class="form-control"name="pwd" placeholder="Password" required>
+                        <div class="input-group">
+                            <input type="password" id="pwd" class="input form-control" name="pwd" placeholder="Password" required>
+                                <span class="input-group-text" onclick="password_show_hide();">
+                                    <i class="bi bi-eye-fill" id="show_eye"></i>
+                                    <i class="bi bi-eye-slash-fill d-none" id="hide_eye"></i>
+                                </span>
+                        </div>                       
                     </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-secondary m-1">Login</button>
@@ -63,4 +69,21 @@ session_start();
         </div>
     </div>
 </body>
+<script>
+    function password_show_hide() {
+    var x = document.getElementById("pwd");
+    var show_eye = document.getElementById("show_eye");
+    var hide_eye = document.getElementById("hide_eye");
+    hide_eye.classList.remove("d-none");
+    if (x.type == "password") {
+    x.type = "text";
+    show_eye.style.display = "none";
+    hide_eye.style.display = "block";
+    } else {
+    x.type = "password";
+    show_eye.style.display = "block";
+    hide_eye.style.display = "none";
+    }
+}
+</script>
 </html>
